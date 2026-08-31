@@ -20,7 +20,7 @@ pipeline {
             }
         }
     }
-    post {
+ post {
     always {
         publishHTML([
             reportDir: 'playwright-report',
@@ -29,13 +29,11 @@ pipeline {
             keepAll: true,
             alwaysLinkToLastBuild: true
         ])
+
+        junit allowEmptyResults: true, testResults: 'test-results/junit.xml'
+
+        archiveArtifacts artifacts: 'playwright-report/**',
+                         allowEmptyArchive: true
     }
 }
-
-    post {
-        always {
-            junit allowEmptyResults: true, testResults: 'test-results/junit.xml'
-            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
-        }
-    }
 }
