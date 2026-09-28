@@ -23,12 +23,13 @@ pipeline {
  post {
     always {
         publishHTML([
-            reportDir: 'playwright-report',
-            reportFiles: 'index.html',
-            reportName: 'Playwright HTML Report',
-            keepAll: true,
-            alwaysLinkToLastBuild: true
-        ])
+    reportDir: 'playwright-report',
+    reportFiles: 'index.html',
+    reportName: 'Playwright HTML Report',
+    keepAll: true,
+    alwaysLinkToLastBuild: true,
+    allowMissing: true
+])
 
         junit allowEmptyResults: true, testResults: 'test-results/junit.xml'
 
